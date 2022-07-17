@@ -1,16 +1,19 @@
 <template>
-  <the-header />
-  <router-view />
+  <div class="container">Products List</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import TheHeader from "./components/TheHeader.vue";
 
 export default defineComponent({
-  components: { TheHeader },
   setup() {
     return {};
   },
 });
 </script>
+
+<style scoped>
+.container {
+  margin-top: 10%;
+}
+</style>
