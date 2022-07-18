@@ -32,7 +32,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
-import { setCookie, getCookie } from "../..//utils/cookies";
+import { setCookie, getCookie } from "../../utils/cookies";
 
 export default defineComponent({
   setup() {

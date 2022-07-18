@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Login from "../views/Auth/Login.vue";
 import ProductsList from "../views/Products/ProductsList.vue";
-import EditProduct from "../views/Products/EditProduct.vue";
+import { getCookie } from "../utils/cookies";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -12,16 +12,17 @@ const routes: Array<RouteRecordRaw> = [
     path: "/products",
     name: "ProductsList",
     component: ProductsList,
-  },
-  {
-    path: "/products/edit/:id",
-    name: "EditProduct",
-    component: EditProduct,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/login",
     name: "Login",
     component: Login,
+    meta: {
+      requiresUnauth: true,
+    },
   },
 ];
 
@@ -30,6 +31,18 @@ const router = createRouter({
   routes,
 });
 
-// router.beforeEach((to, _, next) => {});
+router.beforeEach((to, _, next) => {
+  if (to.meta.requiresAuth && !getCookie("email") && !getCookie("password")) {
+    next("/login");
+  } else if (
+    to.meta.requiresUnauth &&
+    getCookie("email") &&
+    getCookie("password")
+  ) {
+    next("/products");
+  } else {
+    next();
+  }
+});
 
 export default router;
