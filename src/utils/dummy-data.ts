@@ -12,7 +12,7 @@ const products = [
     maxTemp: 50,
   },
   {
-    id: "p1",
+    id: "p2",
     model: "MT8951iP",
     screenSize: 8.2,
     width: 400,
@@ -24,7 +24,7 @@ const products = [
     maxTemp: 70,
   },
   {
-    id: "p1",
+    id: "p3",
     model: "MT8041iP",
     screenSize: 7.1,
     width: 800,
@@ -36,7 +36,7 @@ const products = [
     maxTemp: 60,
   },
   {
-    id: "p1",
+    id: "p4",
     model: "MT8102iP",
     screenSize: 7.3,
     width: 880,
@@ -48,7 +48,7 @@ const products = [
     maxTemp: 60,
   },
   {
-    id: "p1",
+    id: "p5",
     model: "MT8251iP",
     screenSize: 8.3,
     width: 780,

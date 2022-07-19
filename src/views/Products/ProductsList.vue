@@ -1,8 +1,8 @@
 <template>
-  <div class="container table-responsive px-0">
+  <div class="container table-responsive px-0 shadow">
     <table class="table caption-top table-striped table-hover">
-      <caption>
-        Lista produktów
+      <caption class="title">
+        <h3>Lista produktów</h3>
       </caption>
       <thead>
         <tr class="table-primary">
@@ -25,12 +25,15 @@
           <td>{{ prod.ramMemory }} {{ prod.ramMemUnit }}</td>
           <td>{{ prod.flashMemory }} {{ prod.flashMemUnit }}</td>
           <td>od 0 do {{ prod.maxTemp }}°C</td>
-          <td><edit-product /></td>
+          <td class="col cont">
+            <edit-product :product="prod" @save-changes="saveData" />
+            <button @click="removeItem(key)" class="row-6 btn btn-danger">Usuń</button>
+          </td>
         </tr>
       </tbody>
     </table>
-
-    <button class="btn" @click="showItem">Click me</button>
+    <!--
+    <button class="btn" @click="showItem">Click me</button> -->
   </div>
 </template>
 
@@ -53,14 +56,26 @@ export default defineComponent({
       }
     });
 
-    function showItem() {
-      // prods.value[0].model = "xd";
-      //   localStorage.setItem("products", JSON.stringify(prods.value));
-      localStorage.removeItem("products");
-      console.log(prods.value);
-    }
+    const saveData = (payload: any) => {
+      let productId = prods.value.findIndex(
+        (prod: any) => prod.id === payload.id
+      );
+      prods.value[productId] = payload;
+      localStorage.setItem("products", JSON.stringify(prods.value));
+    };
 
-    return { showItem, prods };
+    const removeItem = (key: any) => {
+      prods.value.splice(key, 1);
+    };
+
+    // function showItem() {
+    //   prods.value[0].model = ":D";
+    //   localStorage.setItem("products", JSON.stringify(prods.value));
+    //   localStorage.removeItem("products");
+    //   console.log(prods.value);
+    // }
+
+    return { prods, saveData, removeItem };
   },
 });
 </script>
@@ -68,5 +83,13 @@ export default defineComponent({
 <style scoped>
 .container {
   margin-top: 10%;
+}
+
+.title {
+  text-align: center;
+}
+
+.cont {
+  flex-direction: row;
 }
 </style>
