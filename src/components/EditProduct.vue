@@ -185,7 +185,6 @@
             >
               Zamknij
             </button>
-            <button class="btn" @click="showData">Show</button>
 
             <button
               type="button"
@@ -307,13 +306,9 @@ export default defineComponent({
       emit("save-changes", updatedProduct);
     };
 
-    const showData = () => {
-      console.log(props.product);
-    };
-
     return {
       updatedProduct,
-      showData,
+
       validateForm,
       isValid,
       saveChanges,

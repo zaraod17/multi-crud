@@ -13,6 +13,14 @@
   </header>
 </template>
 
-<style scoped>
+<script lang="ts">
+import { defineComponent } from "vue";
 
-</style>
+export default defineComponent({
+  setup() {
+    return {};
+  },
+});
+</script>
+
+<style scoped></style>

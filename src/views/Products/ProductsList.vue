@@ -25,9 +25,17 @@
           <td>{{ prod.ramMemory }} {{ prod.ramMemUnit }}</td>
           <td>{{ prod.flashMemory }} {{ prod.flashMemUnit }}</td>
           <td>od 0 do {{ prod.maxTemp }}°C</td>
-          <td class="col cont">
-            <edit-product :product="prod" @save-changes="saveData" />
-            <button @click="removeItem(key)" class="row-6 btn btn-danger">Usuń</button>
+          <td class="col">
+            <ul class="list">
+              <li>
+                <edit-product :product="prod" @save-changes="saveData" />
+              </li>
+              <li>
+                <button @click="removeItem(key)" class="btn btn-danger">
+                  Usuń
+                </button>
+              </li>
+            </ul>
           </td>
         </tr>
       </tbody>
@@ -89,7 +97,12 @@ export default defineComponent({
   text-align: center;
 }
 
-.cont {
-  flex-direction: row;
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

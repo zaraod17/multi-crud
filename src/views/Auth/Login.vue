@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref,  } from "vue";
 import { useRouter } from "vue-router";
 import { setCookie, getCookie } from "../../utils/cookies";
 
@@ -52,10 +52,11 @@ export default defineComponent({
         isValid.value = false;
         return;
       }
+
       setCookie("email", creds.value.email, 1);
       setCookie("password", creds.value.password, 1);
 
-      if (document.cookie) router.replace({ name: "ProductsList" });
+      if (getCookie('email') && getCookie('password')) router.replace({ name: "ProductsList" });
     };
 
     return { creds, submitForm };
