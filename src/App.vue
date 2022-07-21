@@ -1,5 +1,5 @@
 <template>
-  <the-header :isUser="isLogged" />
+  <the-header  />
   <router-view />
 </template>
 

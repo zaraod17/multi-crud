@@ -40,8 +40,8 @@
         </tr>
       </tbody>
     </table>
-    <!--
-    <button class="btn" @click="showItem">Click me</button> -->
+
+    <!-- <button class="btn" @click="showItem">Click me</button> -->
   </div>
 </template>
 
@@ -53,37 +53,44 @@ import EditProduct from "@/components/EditProduct.vue";
 export default defineComponent({
   components: { EditProduct },
   setup() {
-    const prods = ref();
+    const prods = ref(JSON.parse(localStorage.getItem("products") || "{}"));
+
+    //  const prods = computed(() => {
+    //   return JSON.parse(localStorage.getItem('products') || "{}");
+    // });
 
     onBeforeMount(() => {
-      if (localStorage.getItem("products")) {
-        prods.value = JSON.parse(localStorage.getItem("products") || "{}");
-      } else {
+      if (prods.value.length <= 0) {
         localStorage.setItem("products", JSON.stringify(products));
         prods.value = JSON.parse(localStorage.getItem("products") || "{}");
+        console.log(localStorage.getItem("products"));
       }
+
     });
 
-    const saveData = (payload: any) => {
+    const saveData = (payload: { id: number; }) => {
       let productId = prods.value.findIndex(
-        (prod: any) => prod.id === payload.id
+        (prod: { id: number; }) => prod.id === payload.id
       );
       prods.value[productId] = payload;
       localStorage.setItem("products", JSON.stringify(prods.value));
     };
 
-    const removeItem = (key: any) => {
+    const removeItem = (key: number) => {
       prods.value.splice(key, 1);
+      localStorage.setItem("products", JSON.stringify(prods.value));
+      console.log(prods.value);
     };
 
     // function showItem() {
-    //   prods.value[0].model = ":D";
-    //   localStorage.setItem("products", JSON.stringify(prods.value));
+    //     prods.value[0].model = ":D";
+    //     localStorage.setItem("products", JSON.stringify(prods.value));
     //   localStorage.removeItem("products");
-    //   console.log(prods.value);
+
+    //   console.log(localStorage.getItem("products"));
     // }
 
-    return { prods, saveData, removeItem };
+    return { prods, saveData, removeItem,  };
   },
 });
 </script>
