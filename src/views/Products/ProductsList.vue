@@ -31,7 +31,7 @@
                 <edit-product :product="prod" @save-changes="saveData" />
               </li>
               <li>
-                <button @click="removeItem(key)" class="btn btn-danger">
+                <button @click="removeItem(key)" class="btn ms-1 btn-danger">
                   Usuń
                 </button>
               </li>
